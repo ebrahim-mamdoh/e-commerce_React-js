@@ -13,16 +13,19 @@ export default function Register() {
 
   async function registerSubmit(values) {
     setisLoading(true);
-    let { data } = await axios
-      .post(`https://ecommerce.routemisr.com/api/v1/auth/signup`, values)
-      .catch((err) => {setisLoading(false);
-        seterror(err.response.data.message);
-      });
-    if (data.message === "success") {
+    try {
+      const response = await axios.post(`https://ecommerce.routemisr.com/api/v1/auth/signup`, values);
+      const { data } = response || {}; // تحقق من وجود البيانات
+      if (data && data.message === "success") {
+        setisLoading(false);
+     
+        navigate("/login");
+      }
+      console.log(data?.message); // استخدام optional chaining operator
+    } catch (err) {
       setisLoading(false);
-      navigate("/login");
+      seterror(err.response.data.message);
     }
-    console.log(data.message);
   }
   let validation = Yup.object({
     name: Yup.string().min(3, "اقل عدد مسموح به من الحروف هو ثلاثه احرف").max(15, "max length must be 15 character").required("الاسم مطلوب"),

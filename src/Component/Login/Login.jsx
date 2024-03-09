@@ -1,15 +1,17 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import style from "./Login.module.css";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Audio } from "react-loader-spinner";
+import { UserToken } from "../../Context/UserToken";
 
 export default function Login() {
   let navigate = useNavigate();
   const [error, seterror] = useState(null);
   const [isLoading, setisLoading] = useState(false);
+ let {setUserToken}= useContext(UserToken)
 
   async function loginSubmit(values) {
     setisLoading(true);
@@ -19,10 +21,14 @@ export default function Login() {
         seterror(err.response.data.message);
       });
     if (data.message === "success") {
+     
       setisLoading(false);
+      localStorage.setItem('userToken',data.token)
+      setUserToken(data.token)
+  
       navigate("/");
     }
-    console.log(data.message);
+   
   }
   let validation = Yup.object({
     email: Yup.string().email("Email invalid").required("الايميل مطلوب"),

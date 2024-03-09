@@ -1,8 +1,26 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import style from "./Navbar.module.css"
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { UserToken } from '../../Context/UserToken'
 
 export default function Navbar() {
+let navigate= useNavigate
+  //استدعيت التوكن بتاعت اليوزر
+let {userToken,setUsertoken} =useContext(UserToken)
+console.log(userToken);
+
+// logOut that do :
+// 1- delet token
+// 2- delet localStorage
+// 3- navegate
+function logOut(){
+  localStorage.removeItem('userToken');
+  setUsertoken(null)
+  navigate('/login')
+}
+
+
+
   return <>
 <nav className="navbar navbar-expand-lg bg-body-tertiary">
   <div className="container-fluid">
@@ -11,24 +29,27 @@ export default function Navbar() {
       <span className="navbar-toggler-icon"></span>
     </button>
     <div className="collapse navbar-collapse" id="navbarNav">
-      <ul className="navbar-nav">
+     {/* //////// hide Navbar if you dont have a token ////////// use ternary oprator */}
+    {userToken?<ul className="navbar-nav">
         
-        <li className="nav-item">
-          <Link className="nav-link"to={'/'}>Home</Link>
-        </li>
-        <li className="nav-item">
-          <Link className="nav-link"to={'products'}>Products</Link>
-        </li>
-        <li className="nav-item">
-          <Link className="nav-link"to={'categories'}>Categories</Link>
-        </li>
-        <li className="nav-item">
-          <Link className="nav-link"to={'features'}>Features</Link>
-        </li>
-        <li className="nav-item">
-          <Link className="nav-link"to={'cart'}>Cart</Link>
-        </li>
-      </ul>
+      <li className="nav-item">
+        <Link className="nav-link"to={'/'}>Home</Link>
+      </li>
+      <li className="nav-item">
+        <Link className="nav-link"to={'products'}>Products</Link>
+      </li>
+      <li className="nav-item">
+        <Link className="nav-link"to={'categories'}>Categories</Link>
+      </li>
+      <li className="nav-item">
+        <Link className="nav-link"to={'features'}>Features</Link>
+      </li>
+      <li className="nav-item">
+        <Link className="nav-link"to={'cart'}>Cart</Link>
+      </li>
+    </ul>:''
+    
+  }
 
 
       <ul className="navbar-nav ms-auto">
@@ -38,15 +59,19 @@ export default function Navbar() {
           <i className='fab fa-instagram mx-1'></i>
           <i className='fab fa-tiktok mx-1'></i>
         </li>
-        <li className="nav-item">
-          <Link className="nav-link"to={'login'}>Login</Link>
+     {/* //////// hide login &register if you have a token ////////// use ternary oprator */}
+
+        {userToken?<li className="nav-item">
+          <Link onClick={()=>logOut()} className="nav-link"to={'logout'}>Logout</Link>
         </li>
-        <li className="nav-item">
-          <Link className="nav-link"to={'register'}>Register</Link>
-        </li>
-        <li className="nav-item">
-          <Link className="nav-link"to={'logout'}>Logout</Link>
-        </li>
+        :<> <li className="nav-item">
+        <Link className="nav-link"to={'login'}>Login</Link>
+      </li>
+      <li className="nav-item">
+        <Link className="nav-link"to={'register'}>Register</Link>
+      </li></> }
+        
+        
       </ul>
     </div>
   </div>

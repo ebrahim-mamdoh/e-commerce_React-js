@@ -9,6 +9,9 @@ import Notfound from './Component/Notfound/Notfound';
 import Products from './Component/Products/Products';
 import Login from './Component/Login/Login';
 import Register from './Component/Register/Register';
+import UserTokenProvider from './Context/UserToken';
+import ProtectedRoute from './Component/ProtectedRoute/ProtectedRoute';
+
 
 export default function App() {
   let routers = createBrowserRouter(
@@ -17,13 +20,13 @@ export default function App() {
         path: '/',
         element: <Layout />,
         children: [
-          { index: true, element: <Home /> },
-          { path: 'cart', element: <Cart /> },
-          { path: 'brands', element: <Brands /> },
-          { path: 'categories', element: <Categories /> },
-          { path: 'products', element: <Products /> },
+          { index: true, element: <ProtectedRoute><Home /></ProtectedRoute>  },
+          { path: 'cart', element:<ProtectedRoute><Cart /></ProtectedRoute>  },
+          { path: 'brands', element: <ProtectedRoute><Brands /></ProtectedRoute> },
+          { path: 'categories', element: <ProtectedRoute><Categories /></ProtectedRoute> },
+          { path: 'products', element: <ProtectedRoute><Products /></ProtectedRoute> },
           { path: 'login', element: <Login /> },
-          { path: 'register', element: <Register /> },
+          { path: 'register', element:<Register />},
           { path: '*', element: <Notfound /> },
         ],
       },
@@ -32,7 +35,9 @@ export default function App() {
 
   return (
     <>
-      <RouterProvider router={routers}></RouterProvider>
+    <UserTokenProvider>
+    <RouterProvider router={routers}></RouterProvider>
+    </UserTokenProvider>
     </>
   );
 }
