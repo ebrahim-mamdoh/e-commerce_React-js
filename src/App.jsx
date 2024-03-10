@@ -17,10 +17,9 @@ export default function App() {
   let routers = createBrowserRouter(
     [
       {
-        path: '/',
-        element: <Layout />,
+        path: '/',element: <Layout />,
         children: [
-          { index: true, element: <ProtectedRoute><Home /></ProtectedRoute>  },
+          {  path: 'home', element: <ProtectedRoute><Home /></ProtectedRoute>  },
           { path: 'cart', element:<ProtectedRoute><Cart /></ProtectedRoute>  },
           { path: 'brands', element: <ProtectedRoute><Brands /></ProtectedRoute> },
           { path: 'categories', element: <ProtectedRoute><Categories /></ProtectedRoute> },

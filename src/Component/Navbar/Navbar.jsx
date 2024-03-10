@@ -7,7 +7,7 @@ export default function Navbar() {
 let navigate= useNavigate
   //استدعيت التوكن بتاعت اليوزر
 let {userToken,setUsertoken} =useContext(UserToken)
-console.log(userToken);
+
 
 // logOut that do :
 // 1- delet token
@@ -33,7 +33,7 @@ function logOut(){
     {userToken?<ul className="navbar-nav">
         
       <li className="nav-item">
-        <Link className="nav-link"to={'/'}>Home</Link>
+        <Link className="nav-link"to={'home'}>Home</Link>
       </li>
       <li className="nav-item">
         <Link className="nav-link"to={'products'}>Products</Link>
