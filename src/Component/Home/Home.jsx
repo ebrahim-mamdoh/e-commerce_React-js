@@ -5,7 +5,7 @@ import FeaturedProducts from '../FeaturedProducts/FeaturedProducts'
 
 export default function Home() {
   return <>
-  <h2>home component  </h2>
+
  <FeaturedProducts/>
 
   </>    

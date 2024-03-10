@@ -16,13 +16,19 @@ useEffect(()=>{getFeatureProducts()},[])
 
 
   return <>
-  <h3>featured product</h3>
   <div className="row">
       {FeaturedProducts.map((product)=>(
-        <div key={product.id} className="col-md-3">
+        <div key={product.id} className="col-md-2 gy-4 gx-4 ">
           <img src={product.imageCover} className='w-100' alt="" />
-
-          <h2 className='h5'>{product.title}</h2>
+          <h2 className='font-sm text-main fw-bold'>{product.category.name}</h2>
+          <h2 className='h5 fw-bold '>{ product.title.split(' ').slice(0,2).join(" ")}</h2>
+          <div className="d-flex justify-content-between">
+            <span>{product.price}EGP</span>
+            <span>
+              <i className='fas fa-star rating-color'></i>
+              {product.ratingsAverage}
+              </span>
+          </div>
            </div>
      ) )}
   </div>
