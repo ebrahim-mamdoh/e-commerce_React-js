@@ -1,15 +1,15 @@
-import React, { useContext, useEffect } from 'react';
-import style from './Layout.module.css';
-import { Outlet } from 'react-router-dom';
-import Navbar from '../Navbar/Navbar';
-import Footer from '../Footer/Footer';
-import { UserToken } from '../../Context/UserToken';
+import React, { useContext, useEffect } from "react";
+import style from "./Layout.module.css";
+import { Outlet } from "react-router-dom";
+import Navbar from "../Navbar/Navbar";
+import Footer from "../Footer/Footer";
+import { UserToken } from "../../Context/UserToken";
 
 export default function Layout() {
   const { setUserToken } = useContext(UserToken);
 
   useEffect(() => {
-    const storedUserToken = localStorage.getItem('userToken');
+    const storedUserToken = localStorage.getItem("userToken");
 
     if (storedUserToken) {
       setUserToken(storedUserToken);
@@ -19,10 +19,7 @@ export default function Layout() {
   return (
     <>
       <Navbar />
-      <div className="container">
-              <Outlet />
-
-      </div>
+      <Outlet />
       <Footer />
     </>
   );

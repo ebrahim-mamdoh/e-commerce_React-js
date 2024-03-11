@@ -29,9 +29,12 @@ a , a:hover{
     box-shadow: var(--shadow);
     border: solid 1px var(--main-color);
 }
-.product .btn 
+.transition{
+    transition: all 0.5s;
+}
+.myLayout .product .btn 
 {
-    transition: transform 1s , opacity 1s;
+    transition: transform 0.5s , opacity  0,5s;
     transform: translateY(100%);
     opacity: 0;
 }
@@ -56,4 +59,10 @@ a , a:hover{
 .bg-main-light 
 {
     background-color: var(--light-color) !important;
+}
+.bg-gary{
+  background-color: #2b2f34;  
+}
+.bg-blow{
+    background-color: #43d7ff;
 }

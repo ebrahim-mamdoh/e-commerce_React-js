@@ -8,10 +8,10 @@ import Home from './Component/Home/Home';
 import Notfound from './Component/Notfound/Notfound';
 import Products from './Component/Products/Products';
 import Login from './Component/Login/Login';
+import ProductDetails from './Component/ProductDetails/ProductDetails';
 import Register from './Component/Register/Register';
 import UserTokenProvider from './Context/UserToken';
 import ProtectedRoute from './Component/ProtectedRoute/ProtectedRoute';
-
 
 export default function App() {
   let routers = createBrowserRouter(
@@ -19,11 +19,12 @@ export default function App() {
       {
         path: '/',element: <Layout />,
         children: [
-          {  path: 'home', element: <ProtectedRoute><Home /></ProtectedRoute>  },
+          {  index:true, element: <ProtectedRoute><Home /></ProtectedRoute>  },
           { path: 'cart', element:<ProtectedRoute><Cart /></ProtectedRoute>  },
           { path: 'brands', element: <ProtectedRoute><Brands /></ProtectedRoute> },
           { path: 'categories', element: <ProtectedRoute><Categories /></ProtectedRoute> },
           { path: 'products', element: <ProtectedRoute><Products /></ProtectedRoute> },
+          { path: 'productDetails/:id', element: <ProtectedRoute><ProductDetails /></ProtectedRoute> },
           { path: 'login', element: <Login /> },
           { path: 'register', element:<Register />},
           { path: '*', element: <Notfound /> },
