@@ -12,6 +12,8 @@ import ProductDetails from './Component/ProductDetails/ProductDetails';
 import Register from './Component/Register/Register';
 import UserTokenProvider from './Context/UserToken';
 import ProtectedRoute from './Component/ProtectedRoute/ProtectedRoute';
+import { Offline, Online } from "react-detect-offline";
+
 
 export default function App() {
   let routers = createBrowserRouter(
@@ -37,6 +39,19 @@ export default function App() {
     <>
     <UserTokenProvider>
     <RouterProvider router={routers}></RouterProvider>
+    <div>
+      {/* check your wifi  */}
+    <Online>
+    <div className='position-fixed bottom-0  right-0 mx-3 my-2'>
+        <i className='fas fa-wifi text-main'></i>
+      </div>
+    </Online>
+    <Offline>
+      <div className='position-fixed bottom-0  right-0 mx-3 my-2'>
+        <i className='fas fa-wifi text-danger'></i>
+      </div>
+    </Offline>
+    </div>
     </UserTokenProvider>
     </>
   );
