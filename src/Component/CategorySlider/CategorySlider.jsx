@@ -19,7 +19,7 @@ export default function CategorySlider() {
   async function getCategories(){
    let{data}= await axios.get(`https://ecommerce.routemisr.com/api/v1/categories`)
   setCategoris(data.data)
-  console.log(data);
+
   }
  useEffect(()=>{
   getCategories()

@@ -13,6 +13,8 @@ import Register from './Component/Register/Register';
 import UserTokenProvider from './Context/UserToken';
 import ProtectedRoute from './Component/ProtectedRoute/ProtectedRoute';
 import { Offline, Online } from "react-detect-offline";
+import CartContextProvider from './Context/CartContext';
+import toast, { Toaster } from 'react-hot-toast';
 
 
 export default function App() {
@@ -37,6 +39,7 @@ export default function App() {
 
   return (
     <>
+    <CartContextProvider>
     <UserTokenProvider>
     <RouterProvider router={routers}></RouterProvider>
     <div>
@@ -52,7 +55,9 @@ export default function App() {
       </div>
     </Offline>
     </div>
+    <Toaster/>
     </UserTokenProvider>
+    </CartContextProvider>
     </>
   );
 }

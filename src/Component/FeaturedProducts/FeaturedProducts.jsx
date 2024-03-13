@@ -1,12 +1,30 @@
-import React, { useEffect, useState } from "react";
+import React, {  useContext, useEffect, useState } from "react";
 import style from "./FeaturedProducts.module.css";
 import axios from "axios";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
+import {CartContext} from '../../Context/CartContext'
+import toast from "react-hot-toast";
+
+
 export default function FeaturedProducts() {
-  function getFeatureProducts() {
+ let{addToCart} =useContext(CartContext)
+  
+async function addCart(id){
+let {data}= await addToCart(id)
+if (data.status=='success') {
+  //to give you message add to cart
+  toast.success(data.message,{
+     duration: 4000,
+    position: 'top-center',
+  })
+}
+ }
+ function getFeatureProducts() {
     return axios.get(`https://ecommerce.routemisr.com/api/v1/products`);
   }
+
+
   let { data, isLoading, isFetching, isError } = useQuery(
     "featuedProduct",
     getFeatureProducts
@@ -38,7 +56,7 @@ export default function FeaturedProducts() {
                 <span> <i className="fas fa-star rating-color"></i>{product.ratingsAverage} </span>
                 </div>
                 </Link>
-                <button className="btn bg-main text-white w-100 btn-sm transition">Add To Cart</button>
+                <button onClick={()=>addCart(product.id)} className="btn bg-main text-white w-100 btn-sm transition">Add To Cart</button>
                 </div>
                
               </div>

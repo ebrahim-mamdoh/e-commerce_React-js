@@ -1,11 +1,25 @@
-import React from "react";
+import React, { useContext } from "react";
 import style from "./ProductDetails.module.css";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useQuery } from "react-query";
 import Slider from "react-slick";
+import {Helmet} from "react-helmet";
+import { CartContext } from "../../Context/CartContext";
+import toast from "react-hot-toast";
 
 export default function ProductDetails() {
+  let {addToCart}= useContext(CartContext)
+  async function addCart(id){
+    let {data} =await addToCart(id)
+    if (data.status=='success') {
+      //to give you message add to cart
+      toast.success(data.message,{
+         duration: 4000,
+        position: 'top-center',
+      })
+    }
+  }
   let { id } = useParams();
   function getProductDetails(id) {
     return axios.get(`https://ecommerce.routemisr.com/api/v1/products/${id}`);
@@ -31,6 +45,10 @@ export default function ProductDetails() {
 
   return (
     <>
+     <Helmet>
+                <meta charSet="utf-8" />
+                <title>{data?.data.data.title}</title>
+            </Helmet>
       <div className="container">
         <div className="row py-5">
           <div className="col-md-3">
@@ -53,7 +71,7 @@ export default function ProductDetails() {
                   {data?.data.data.ratingsAverage}{" "}
                 </span>
               </div>
-              <button type="button" class="w-100 btn bg-main text-white my-3">
+              <button onClick={()=>addToCart(data?.data.data.id)} type="button" class="w-100 btn bg-main text-white my-3">
                 Add To Cart
               </button>
             </div>
