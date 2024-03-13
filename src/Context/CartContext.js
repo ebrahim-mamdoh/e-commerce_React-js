@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const{createContext}=require('react')
+const { createContext } = require('react')
 
 
 export const CartContext = createContext();
@@ -19,16 +19,36 @@ export default function CartContextProvider(props) {
     }).then((res) => res)
       .catch((err) => err);
   }
-function getCart(){
-  //send headers to now whos this user
-  return axios.get(`https://ecommerce.routemisr.com/api/v1/cart`,{
-    headers
-  })
-  .then((res)=>res)
-  .catch((err)=>err)
-}
+  function getCart() {
+    //send headers to now whos this user
+    return axios.get(`https://ecommerce.routemisr.com/api/v1/cart`, {
+      headers
+    })
+      .then((res) => res)
+      .catch((err) => err)
+  }
+
+  function removeCartItem(id){
+    return axios.delete(`https://ecommerce.routemisr.com/api/v1/cart/${id}`, {
+      headers
+    })
+      .then((res) => res)
+      .catch((err) => err)
+  }
+
+  function updateCart(id ,count){
+    return axios.put(`https://ecommerce.routemisr.com/api/v1/cart/${id}`, {
+      count
+    },{
+      headers
+    })
+      .then((res) => res)
+      .catch((err) => err)
+  }
+
+
   return (
-    <CartContext.Provider value={{ addToCart,getCart }}>
+    <CartContext.Provider value={{ addToCart, getCart, removeCartItem, updateCart}}>
       {props.children}
     </CartContext.Provider>
   );
