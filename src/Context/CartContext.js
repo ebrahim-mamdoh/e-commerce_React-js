@@ -19,9 +19,16 @@ export default function CartContextProvider(props) {
     }).then((res) => res)
       .catch((err) => err);
   }
-
+function getCart(){
+  //send headers to now whos this user
+  return axios.get(`https://ecommerce.routemisr.com/api/v1/cart`,{
+    headers
+  })
+  .then((res)=>res)
+  .catch((err)=>err)
+}
   return (
-    <CartContext.Provider value={{ addToCart }}>
+    <CartContext.Provider value={{ addToCart,getCart }}>
       {props.children}
     </CartContext.Provider>
   );

@@ -71,7 +71,7 @@ export default function ProductDetails() {
                   {data?.data.data.ratingsAverage}{" "}
                 </span>
               </div>
-              <button onClick={()=>addToCart(data?.data.data.id)} type="button" class="w-100 btn bg-main text-white my-3">
+              <button onClick={()=>addCart(data?.data.data.id)} type="button" class="w-100 btn bg-main text-white my-3">
                 Add To Cart
               </button>
             </div>
