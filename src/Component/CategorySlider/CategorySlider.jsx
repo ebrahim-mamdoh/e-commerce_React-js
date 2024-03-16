@@ -26,9 +26,7 @@ export default function CategorySlider() {
  },[])
  return (
   <>
-  <div className='container'>
-
-
+  {categoris?<div className='container'>
   <h2 className='h4'>Shop popular Category</h2>
   <div className='my-2 '>
      <Slider {...settings}>
@@ -37,7 +35,8 @@ export default function CategorySlider() {
       ))}
     </Slider>
   </div>
-  </div>
+  </div>:''}
+  
   </>
 );
 

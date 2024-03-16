@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import style from "./Navbar.module.css"
 import { Link, useNavigate } from 'react-router-dom'
 import { UserToken } from '../../Context/UserToken'
-
+import logo from '../../Assets/images/freshcart-logo.svg'
 export default function Navbar() {
 let navigate= useNavigate
   //استدعيت التوكن بتاعت اليوزر
@@ -24,7 +24,9 @@ function logOut(){
   return <>
 <nav className="navbar navbar-expand-lg bg-body-tertiary">
   <div className="container-fluid">
-    <a className="navbar-brand" href="#">Navbar</a>
+    <a className="navbar-brand" href="#">
+      <img src={logo} alt="" />
+    </a>
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span className="navbar-toggler-icon"></span>
     </button>
