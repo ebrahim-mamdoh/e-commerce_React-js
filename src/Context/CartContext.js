@@ -46,9 +46,17 @@ export default function CartContextProvider(props) {
       .catch((err) => err)
   }
 
-
+  function onlinePayment(cartId ,shippingAddress){
+    return axios.post(`https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${cartId}?url=http://localhost:3000`, {
+      shippingAddress
+    },{
+      headers
+    })
+      .then((res) => res)
+      .catch((err) => err)
+  }
   return (
-    <CartContext.Provider value={{ addToCart, getCart, removeCartItem, updateCart}}>
+    <CartContext.Provider value={{onlinePayment, addToCart, getCart, removeCartItem, updateCart}}>
       {props.children}
     </CartContext.Provider>
   );

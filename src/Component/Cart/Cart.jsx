@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import style from "./Cart.module.css";
 import { CartContext } from "../../Context/CartContext";
 import { Triangle } from "react-loader-spinner";
+import { Link } from "react-router-dom";
+
 
 export default function Cart() {
 
@@ -33,6 +35,7 @@ setCartItems(data)
 
     setCartItems(data);
     setLoading(false);
+    console.log(data);
   }
 
   useEffect(() => {
@@ -96,6 +99,9 @@ setCartItems(data)
                 </div>
               </div>
             ))}
+            <Link to={`/checkout/${cartItems.data._id}`}>
+                        <button className="btn bg-main text-white">Checkout</button>
+            </Link>
           </div>
         )}
       </div>
