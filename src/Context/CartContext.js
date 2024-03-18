@@ -1,11 +1,28 @@
 import axios from "axios";
 
-const { createContext } = require('react')
+const { createContext, useEffect, useState } = require('react')
 
 
 export const CartContext = createContext();
 
 export default function CartContextProvider(props) {
+
+const [numOfCartItems, setnumOfCartItems] = useState(0)
+
+ async function getCartCount(){
+  let {data}= await getCart()
+  if (data?.status=='success') {
+    setnumOfCartItems(data.numOfCartItems)
+  }
+}
+  useEffect(()=>{
+    getCartCount()
+  },[])
+
+
+
+
+
   let userToken = localStorage.getItem('userToken');
   let headers = {
     token: userToken
@@ -56,7 +73,7 @@ export default function CartContextProvider(props) {
       .catch((err) => err)
   }
   return (
-    <CartContext.Provider value={{onlinePayment, addToCart, getCart, removeCartItem, updateCart}}>
+    <CartContext.Provider value={{setnumOfCartItems,numOfCartItems,onlinePayment, addToCart, getCart, removeCartItem, updateCart}}>
       {props.children}
     </CartContext.Provider>
   );

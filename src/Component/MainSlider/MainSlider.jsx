@@ -9,7 +9,7 @@ import img2 from '../../Assets/images/images (2).jpeg'
 
 export default function MainSlider() {
   var settings = {
-    dots: true,
+    dots: false,
     arrows: false,
     autoplay: true,
     autoplaySpeed: 1000,

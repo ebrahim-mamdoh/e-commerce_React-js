@@ -3,8 +3,12 @@ import style from "./Navbar.module.css"
 import { Link, useNavigate } from 'react-router-dom'
 import { UserToken } from '../../Context/UserToken'
 import logo from '../../Assets/images/freshcart-logo.svg'
+import { CartContext } from '../../Context/CartContext'
 export default function Navbar() {
 let navigate= useNavigate
+
+let {numOfCartItems} =useContext(CartContext)
+
   //استدعيت التوكن بتاعت اليوزر
 let {userToken,setUsertoken} =useContext(UserToken)
 
@@ -22,7 +26,7 @@ function logOut(){
 
 
   return <>
-<nav className="navbar navbar-expand-lg bg-body-tertiary">
+<nav className="navbar navbar-expand-lg bg-body-tertiary position fixed-top">
   <div className="container-fluid">
     <a className="navbar-brand" href="#">
       <img src={logo} alt="" />
@@ -47,7 +51,7 @@ function logOut(){
         <Link className="nav-link"to={'features'}>Features</Link>
       </li>
       <li className="nav-item">
-        <Link className="nav-link"to={'cart'}>Cart</Link>
+        <Link className="nav-link " to={'cart'}><i className='fas fa-shopping-cart '></i> {numOfCartItems}</Link>
       </li>
     </ul>:''
     

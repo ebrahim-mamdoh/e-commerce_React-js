@@ -8,16 +8,17 @@ import toast from "react-hot-toast";
 
 
 export default function FeaturedProducts() {
- let{addToCart} =useContext(CartContext)
+ let{addToCart,setnumOfCartItems} =useContext(CartContext)
   
 async function addCart(id){
 let {data}= await addToCart(id)
 if (data.status=='success') {
-  //to give you message add to cart
+  //toaster to give you message add to cart
   toast.success(data.message,{
      duration: 4000,
     position: 'top-center',
   })
+  setnumOfCartItems(data.numOfCartItems)
 }
  }
  function getFeatureProducts() {
