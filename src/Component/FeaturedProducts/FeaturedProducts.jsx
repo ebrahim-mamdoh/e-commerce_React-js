@@ -5,30 +5,38 @@ import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
 import {CartContext} from '../../Context/CartContext'
 import toast from "react-hot-toast";
+import { Triangle } from "react-loader-spinner";
 
 
 export default function FeaturedProducts() {
+  // const [loading, setloading] = useState(true)
  let{addToCart,setnumOfCartItems} =useContext(CartContext)
   
 async function addCart(id){
 let {data}= await addToCart(id)
 if (data.status=='success') {
+
   //toaster to give you message add to cart
   toast.success(data.message,{
      duration: 4000,
     position: 'top-center',
+    
   })
-  setnumOfCartItems(data.numOfCartItems)
+  setnumOfCartItems(data.numOfCartItems);
 }
  }
  function getFeatureProducts() {
     return axios.get(`https://ecommerce.routemisr.com/api/v1/products`);
+
   }
 
 
   let { data, isLoading, isFetching, isError } = useQuery(
     "featuedProduct",
     getFeatureProducts
+
+
+    
   );
 
   //using null seafty??????? to verify from arrive the first data
@@ -42,7 +50,20 @@ if (data.status=='success') {
 
   return (
     <>
-      <div className={` myLayout `}>
+      {isLoading?(
+          <div className="w-100  d-flex justify-content-center ">
+          <Triangle
+            visible={true}
+            height="80"
+            width="80"
+            color="#4fa94d"
+            ariaLabel="triangle-loading"
+            wrapperStyle={{}}
+            wrapperClass=""
+          />
+        </div>
+      ):(
+        <div className={` myLayout `}>
         <div className="container">
           <div className="row">
             {data?.data.data.map((product) => (
@@ -65,6 +86,8 @@ if (data.status=='success') {
           </div>
         </div>
       </div>
+      )}
+   
     </>
   );
 }

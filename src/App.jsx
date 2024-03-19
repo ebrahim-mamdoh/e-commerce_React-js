@@ -11,6 +11,8 @@ import Login from './Component/Login/Login';
 import Checkout from './Component/Checkout/Checkout';
 import ProductDetails from './Component/ProductDetails/ProductDetails';
 import Register from './Component/Register/Register';
+import UserProfile from './Component/UserProfile/UserProfile';
+
 import UserTokenProvider from './Context/UserToken';
 import ProtectedRoute from './Component/ProtectedRoute/ProtectedRoute';
 import { Offline, Online } from "react-detect-offline";
@@ -19,6 +21,8 @@ import toast, { Toaster } from 'react-hot-toast';
 
 
 export default function App() {
+
+  
   let routers = createBrowserRouter(
     [
       {
@@ -29,6 +33,7 @@ export default function App() {
           { path: 'brands', element: <ProtectedRoute><Brands /></ProtectedRoute> },
           { path: 'categories', element: <ProtectedRoute><Categories /></ProtectedRoute> },
           { path: 'products', element: <ProtectedRoute><Products /></ProtectedRoute> },
+          { path: 'UserProfile', element: <ProtectedRoute><UserProfile /></ProtectedRoute> },
           { path: 'checkout/:id', element: <ProtectedRoute><Checkout /></ProtectedRoute> },
           { path: 'productDetails/:id', element: <ProtectedRoute><ProductDetails /></ProtectedRoute> },
           { path: 'login', element: <Login /> },

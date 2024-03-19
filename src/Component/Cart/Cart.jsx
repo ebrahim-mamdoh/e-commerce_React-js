@@ -33,11 +33,11 @@ export default function Cart() {
 
   return (
     <>
-      <div className="container">
-        {loading ? (
-          <div className="w-100  d-flex justify-content-center ">
+      {loading ? (
+        <div className={`${style.loading}`}>
+          <div className="w-100 d-flex justify-content-center  ">
             <Triangle
-              visible={true}
+              visible={true} 
               height="80"
               width="80"
               color="#4fa94d"
@@ -46,8 +46,10 @@ export default function Cart() {
               wrapperClass=""
             />
           </div>
-        ) : (
-          <div className=" bg-main-light  p-4 mt-2">
+        </div>
+      ) : (
+        <div className="container">
+          <div className=" bg-main-light  p-4 mt-5">
             <h2>Shop Cart</h2>
             {cartItems && cartItems.data ? (
               <>
@@ -109,15 +111,19 @@ export default function Cart() {
                   </div>
                 ))}
                 <Link to={`/checkout/${cartItems.data._id}`}>
-                  <button className="btn bg-main text-white">Checkout</button>
+                  <div className="d-flex justify-content: flex-end mt-4">
+                    <button className="btn bg-main text-white ">
+                      Checkout
+                    </button>
+                  </div>
                 </Link>
               </>
             ) : (
               <p>No items in the cart</p>
             )}
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </>
   );
 }
